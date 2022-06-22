@@ -5,11 +5,23 @@
 #include <stdlib.h>   /* for abort() */
 #include <memory.h>   /* for memcpy() */
 
+#ifdef __SSE2__
+#   include <emmintrin.h>
+#endif
+#if defined(__AVX512F__) || defined(__AVX512BW__) || defined(__AVX__) || defined(__AVX2__)
+#   include <immintrin.h>
+#endif
+#if defined(__aarch64__)
+#   if defined(__ARM_NEON)
+#       include <arm_neon.h>
+#   elif defined(__ARM_FEATURE_CRC32)
+#       include <arm_acle.h>
+#   endif
+#endif
+
 #if __GNUC__
-#include <x86intrin.h>
 #define ALIGN(n)      __attribute__ ((aligned(n)))
 #elif _MSC_VER
-#include <intrin.h>
 #define ALIGN(n)      __declspec(align(n))
 #else
 #define ALIGN(n)
