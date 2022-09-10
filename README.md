@@ -65,7 +65,7 @@ The universal hashing formula used here (and copied intact from UMAC) is as simp
 ```
 
 ## The main loop
-- [Source code](farsh.c#L28)
+- [Source code](farsh.c#L40)
 - Asm code (can be found by searching for adcl+mull/pmuludq instructions)
   - [gcc -O3 -funroll-loops -m32](asm-listings/gcc-x86.lst#L340)
   - [gcc -O3 -funroll-loops -m32 -msse2 -DFARSH_SSE2](asm-listings/gcc-x86-sse2.lst#L349)
